@@ -1,0 +1,51 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'maven-publish'
+}
+
+group 'net.livingsky.framework'
+version '1.0.0'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+publishing {
+    publications {
+        myPublication(MavenPublication) {
+            from components.java
+            pom {
+                name = "living-framework-scanner"
+                description = "Livingsky framework scanner"
+                url = "https://www.mikoto.net.cn"
+                licenses {
+                    license {
+                        name = "The Apache License, Version 2.0"
+                        url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+                    }
+                }
+                developers {
+                    developer {
+                        id = "mikoto"
+                        name = "Zhang keshun"
+                        email = "mikoto@ungine.cn"
+                    }
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation 'org.reflections:reflections:0.10.2'
+    compileOnly 'net.livingsky.framework:living-framework:1.0.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+}
+
+test {
+    useJUnitPlatform()
+}
